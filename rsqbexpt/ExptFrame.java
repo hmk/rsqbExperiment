@@ -32,16 +32,10 @@ public class ExptFrame extends JFrame {
 		
 		//finally, set up the scribe
 		_scribe = new ExcelScribe();
-		_totalquestions = _scribe.getTotalQs(); 
+		_totalquestions = _scribe.getTotalQs();
 		_fromquestion = _scribe.getFromQuestion();
 		_toquestion = _scribe.getToQuestion();
 	
-//		/* TODO: DELETE, THIS WAS ADDED FOR TESTING PURPOSES ONLY */
-//		String s = _scribe.getPercent(2,1);
-//		s=s.replaceAll("\\D","");
-//		s=("0."+s);
-//		System.out.println(Double.parseDouble(s));
-//	
 	}
 
 

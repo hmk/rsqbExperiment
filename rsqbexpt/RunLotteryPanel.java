@@ -1,6 +1,8 @@
 package rsqbexpt;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -24,10 +26,17 @@ public class RunLotteryPanel extends ExptPanel{
 
 		//add a label
 		_winningslabel = new JLabel("");
+		JPanel wrap = new JPanel();
+		wrap.add(_winningslabel);
+		_c.fill = GridBagConstraints.HORIZONTAL;
 		_c.gridx=0;
-		_c.gridy=0;
-		_middlepanel.add(_winningslabel,_c);
-
+		_c.gridy=49;
+		_c.gridwidth=2;
+		_middlepanel.add(wrap,_c);
+		
+		//reset the grid
+		_c.gridwidth =1;
+		
 		// get question and numops
 		_q = _frame.getUser().getQuestionAtIndex(_frame._roll);
 		int numops = _frame.getScribe().getNumQOps(_q.number);
@@ -51,18 +60,20 @@ public class RunLotteryPanel extends ExptPanel{
 			}
 		}
 		for (int i=0;i<v.size();i++){
+			_c.insets = new Insets(50,50,50,50);
+
 			_c.gridy=i+3;
 			_middlepanel.add(v.get(i),_c);
 		}
 
 
 		//add button to participate in the lottery
-		JPanel wrap = new JPanel();
+		JPanel wrap2 = new JPanel();
 		_playLotButton = new JButton("I am ready");
 		_playLotButton.addActionListener(new PlayLotteryListener());
-		_c.gridy=1;
-		wrap.add(_playLotButton);
-		_middlepanel.add(wrap,_c);
+		_c.gridy=50;
+		wrap2.add(_playLotButton);
+		_middlepanel.add(wrap2,_c);
 
 		//add the button to finish the lottery
 		_finishButton = new JButton("continue");
@@ -95,7 +106,7 @@ public class RunLotteryPanel extends ExptPanel{
 				if(randdub <=(s1double+currdisplacement)){
 					DecimalFormat df = new DecimalFormat("0.0##");
 					String newDub = df.format(randdub);
-					_winningslabel.setText("<html>You rolled a "+newDub+"<br />  Congratulations, you won <br /><h1>"+s2+"</h1></html>");
+					_winningslabel.setText("<html><center>You rolled a "+newDub+"<br />  Congratulations, you won <br /><h1>"+s2+"</h1></center></html>");
 					foundyet=true;
 				}
 				else

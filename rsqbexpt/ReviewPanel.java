@@ -32,7 +32,7 @@ public class ReviewPanel extends ExptPanel {
 		int cols = (int)java.lang.Math.ceil(java.lang.Math.sqrt(_totalqs));
 		//create a jbutton vector
 		Vector<JLabel> v = new Vector<JLabel>();
-		GridLayout gl = new GridLayout(0,cols,15,15);
+		GridLayout gl = new GridLayout(0,cols,50,50);
 		reviewpanel.setLayout(gl);
 		for (int i=0;i<_totalqs;i++){
 			Question question = _frame.getUser().getQuestionAtIndex(i);
@@ -44,7 +44,7 @@ public class ReviewPanel extends ExptPanel {
 			revlabel.setFont(new Font(revlabel.getFont().getName(),Font.PLAIN,revlabel.getFont().getSize()));
 			revlabel.setOpaque(true);
 			lvect.add(revlabel);
-			reviewpanel.add(revlabel);
+			reviewpanel.add(revlabel,_c);
 		}
 		_middlepanel.add(reviewpanel);
 
