@@ -37,7 +37,11 @@ public class UserIDSubmitPanel extends ExptPanel {
 		subidbtn.addActionListener(new submitIDActionListener());
 		_c.gridx=0;
 		_c.gridy=0;
-		_middlepanel.add(_idfield,_c);
+		_c.gridwidth=2;
+		JPanel wrap = new JPanel();
+		wrap.add(_idfield);
+		_middlepanel.add(wrap,_c);
+		_c.gridwidth=1;
 		_c.gridx=0;
 		_c.gridy=1;
 		_middlepanel.add(subidbtn,_c);
@@ -50,8 +54,8 @@ public class UserIDSubmitPanel extends ExptPanel {
 		_errorlabel = new JLabel("user ID not recognized");
 		_errorlabel.setVisible(false);
 		_errorlabel.setForeground(java.awt.Color.red);
-		_c.gridx=0;
-		_c.gridy=3;
+		_c.gridx=1;
+		_c.gridy=1;
 		_c.anchor = GridBagConstraints.CENTER;
 		_southpanel.add(_errorlabel,_c);
 

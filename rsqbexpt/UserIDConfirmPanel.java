@@ -29,21 +29,22 @@ public class UserIDConfirmPanel extends ExptPanel {
 		
 		
 		_c.gridx = 0;
-		_c.gridy = 1;
-		_middlepanel.add(textlabel,_c);
+		_c.gridy = 0;
+		_c.gridwidth=2;
+		JPanel wrap2 = new JPanel();
+		wrap2.add(textlabel);
+		_middlepanel.add(wrap2,_c);
+		_c.gridwidth=1;
 		_c.gridx = 0;
-		_c.gridy = 2;
+		_c.gridy = 1;
 		JPanel wrap = new JPanel();
 		wrap.add(confbtn);
 		_middlepanel.add(wrap,_c);
-		_c.gridx = 0;
-		_c.gridy = 3;
-		_middlepanel.add(new JLabel("<html><br /> <br /></html>"),_c);//spacer
-		_c.gridx = 0;
-		_c.gridy = 4;
-		JPanel wrap2 = new JPanel();
-		wrap2.add(rejbtn);
-		_middlepanel.add(wrap2,_c);
+		_c.gridx = 1;
+		_c.gridy = 1;
+		JPanel wrap3 = new JPanel();
+		wrap3.add(rejbtn);
+		_middlepanel.add(wrap3,_c);
 
 
 	}
