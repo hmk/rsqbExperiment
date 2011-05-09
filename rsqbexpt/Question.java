@@ -12,11 +12,12 @@ package rsqbexpt;
 import java.util.Vector;
 
 public class Question {
-	public int number,_sqtype,_sq,_response;
+	public int number,_sqtype,_sq,_response,_index;
 	public Vector<Integer> _lotteries;
 	
-	public Question(int questionnumber, Vector<Integer> lotteries, int sqtype, int sq){
+	public Question(int index,int questionnumber, Vector<Integer> lotteries, int sqtype, int sq){
 		number = questionnumber;
+		_index = index;
 		_lotteries=lotteries;
 		_sqtype = sqtype;
 		_sq=sq;

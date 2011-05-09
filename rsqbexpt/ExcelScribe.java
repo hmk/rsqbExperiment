@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Stack;
+import java.util.Vector;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -197,7 +201,14 @@ public class ExcelScribe {
 		return lotID;
 	}
 	
-	/** returns the value of a cell (only if its an int) */
+	/**
+	 * returns an int (only) for sht, col, row
+	 * 
+	 * @param sht
+	 * @param col
+	 * @param row
+	 * @return
+	 */
 	private int readInt(int sht,int col, int row){
 		String value = null;
 		//grab the correct sheet
@@ -245,9 +256,64 @@ public class ExcelScribe {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * returns the total questions for a user
+	 * with treatment: treatmentID
+	 * @param treatmentID
+	 * @return
+	 */
+	public int getTotalQsForTreatment(int treatmentID) {
+		int sht = 3;
+		int col = 1;
+		int row = treatmentID;
+		return this.readInt(sht, col, row);
+	}
+	
+	/**
+	 * returns the treatment for a user with id: userid
+	 * @param userid
+	 * @return
+	 */
+	public int getTreatmentForUserID(int userid) {
+		int sht = 4;
+		int col = 1;
+		int row = userid;
+		return this.readInt(sht, col, row);
+	}
+	
+	public Question[] getQArrayForTreatment(int treatmentID) {
+		//create a stack of ints
+		Stack<Integer> qnumstack = new Stack<Integer>();
 
-	public int getTotalQs() {
-		return this.readInt(0, 0, 26);
+		//TODO: put in some catch/throws here perhaps
+		int totalqs = this.getTotalQsForTreatment(treatmentID);
+		//push all the question ints into a stack
+		for (int i=0;i<totalqs;i++)
+			qnumstack.push(this.readInt(3, (2+i), treatmentID));
+		//shuffle the stack
+		Collections.shuffle(qnumstack);
+		
+		//create a question array
+		Question[] qarray = new Question[totalqs];
+		
+		for (int i=0;i<totalqs;i++){
+			int qnumber = qnumstack.pop();
+			int numops = this.getNumQOps(qnumber);
+			Vector<Integer> options = new Vector<Integer>();
+			for (int j=0;j<this.getNumQOps(qnumber);j++)
+				options.add(this.getLotteryNumber(qnumber,j));
+			Question tempquest = new Question(
+					i,//the question index
+					qnumber,//the question number
+					options,//the vector of options,
+					this.getStatusQuoType(qnumber),//the type of SQ
+					this.getStatusQuoOption(qnumber)//the status quo option
+					);
+			qarray[i]=tempquest;
+		}
+		
+		return qarray;
 	}
 	
 	public int getFromQuestion(){

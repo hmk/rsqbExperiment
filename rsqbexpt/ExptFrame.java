@@ -32,7 +32,6 @@ public class ExptFrame extends JFrame {
 		
 		//finally, set up the scribe
 		_scribe = new ExcelScribe();
-		_totalquestions = _scribe.getTotalQs();
 		_fromquestion = _scribe.getFromQuestion();
 		_toquestion = _scribe.getToQuestion();
 	
@@ -139,7 +138,7 @@ public void switchToPrepUpload(String winamount) {
 	 * @param text
 	 */
 	public void createUser(String text) {
-		_user = new ExptUser(this,text, _totalquestions,_fromquestion,_toquestion);
+		_user = new ExptUser(this,text);
 	}
 	
 /*
