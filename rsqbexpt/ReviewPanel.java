@@ -21,7 +21,7 @@ public class ReviewPanel extends ExptPanel {
 	public ReviewPanel(Dimension d, ExptFrame ef){
 		super(d,ef);
 
-		//set up the random delay which will later select the lotery
+		//set up the random delay which will later select the lottery
 		double randdub = new java.util.Random().nextDouble()*20+10;
 		_randdelay = (int) randdub;
 		//store the totalqs
