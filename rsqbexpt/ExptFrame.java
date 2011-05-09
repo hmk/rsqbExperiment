@@ -86,16 +86,6 @@ public void switchToReviewPage() {
 		this.add(rp);
 	}
 
-public void returnToQuestion(int _qid) {
-	//TODO: need to have this actually use the selected :)
-	QuestionPanel backtoq = new ReviewQuestionPanel(_dimension, this, _qid,1);	
-	_currentPanel.setVisible(false);
-	_currentPanel = backtoq;
-	this.add(backtoq);
-
-}
-
-
 public void switchToRunLottery() {
 	RunLotteryPanel rlp = new RunLotteryPanel(_dimension,this);
 	_currentPanel.setVisible(false);
