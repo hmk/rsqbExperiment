@@ -27,6 +27,7 @@ public class UserIDConfirmPanel extends ExptPanel {
 		JButton rejbtn = new JButton("no");
 		rejbtn.addActionListener(new rejectIDActionListener());
 		
+		
 		_c.gridx = 0;
 		_c.gridy = 1;
 		_middlepanel.add(textlabel,_c);
