@@ -95,9 +95,11 @@ public class QuestionPanel extends ExptPanel {
 		for (int i=0;i<numOps;i++){
 			int myrow = i;
 			int mycol = 0;
+			if(max>=3){
 			while (myrow >=max){
 				myrow = myrow-(max);
 				mycol = mycol+1;
+			}
 			}
 			bgroup.add(_options.get(i));
 			_c.gridx=mycol;
