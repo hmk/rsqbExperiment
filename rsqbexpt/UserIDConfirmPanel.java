@@ -32,13 +32,17 @@ public class UserIDConfirmPanel extends ExptPanel {
 		_middlepanel.add(textlabel,_c);
 		_c.gridx = 0;
 		_c.gridy = 2;
-		_middlepanel.add(confbtn,_c);
+		JPanel wrap = new JPanel();
+		wrap.add(confbtn);
+		_middlepanel.add(wrap,_c);
 		_c.gridx = 0;
 		_c.gridy = 3;
 		_middlepanel.add(new JLabel("<html><br /> <br /></html>"),_c);//spacer
 		_c.gridx = 0;
 		_c.gridy = 4;
-		_middlepanel.add(rejbtn,_c);
+		JPanel wrap2 = new JPanel();
+		wrap2.add(rejbtn);
+		_middlepanel.add(wrap2,_c);
 
 
 	}
