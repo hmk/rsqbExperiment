@@ -28,21 +28,26 @@ public class QuestionPanel extends ExptPanel {
 
 		//do whatever is necessary to set up a status quo
 		
-		_c.ipadx = 0;
-		_c.fill = GridBagConstraints.HORIZONTAL;
-		JLabel qnumlabel = new JLabel("<html><h1>Question "+(_index+1)+" of "+_frame._totalquestions+"</h1></html>");
-		_c.gridx=0;
-		_c.gridy=0;
-		_c.anchor = GridBagConstraints.CENTER;
-		_middlepanel.add(qnumlabel,_c);
+//		_c.ipadx = 0;
+//		_c.fill = GridBagConstraints.HORIZONTAL;
+//		JPanel wrap1 = new JPanel();
+//		JLabel qnumlabel = new JLabel();
+//		wrap1.add(qnumlabel);
+//		_c.gridx=0;
+//		_c.gridy=0;
 		
-
+		_middlepanel.setBorder(new javax.swing.border.TitledBorder("Question "+(_index+1)+" of "+_frame._totalquestions));
 		//get the number of options for question at index
 		int numOps = _question._lotteries.size();
 
 		//create a vector for the radio buttons
 		_options = new Vector<JRadioButton>(); 
-
+		
+		//set the _c for the SQ
+		_c.gridwidth=1;
+		_c.gridx=0;
+		_c.gridy=3;
+		
 		//create path to one to select so that we can select it after making the buttongroup
 		JRadioButton selected = null;
 		for (int i=0; i<numOps;i++){
@@ -56,7 +61,7 @@ public class QuestionPanel extends ExptPanel {
 					break;
 				case 1:
 					//this will just have a suggested option on the top pane
-					_northpanel.add(new JLabel("<html>"+htmlstring+"</html>"));
+					_northpanel.add(new JLabel("<html>"+htmlstring+"</html>"),_c);
 					break;
 				case 2:
 					//this will just pre-select the status quo option
@@ -67,7 +72,7 @@ public class QuestionPanel extends ExptPanel {
 				case 3:
 					//this will put the SQ above AND pre-select
 					selected=tempbutton;
-					_northpanel.add(new JLabel("<html>"+htmlstring+"</html"));
+					_northpanel.add(new JLabel("<html>"+htmlstring+"</html"),_c);
 					_question._response = _question._sq;
 					break;
 					
@@ -78,13 +83,24 @@ public class QuestionPanel extends ExptPanel {
 			tempbutton.addActionListener(new lradioAL(lotteryNumber));
 			_options.add(i,tempbutton);
 		}
-		//add the labels to a button group
+		
+		
+		//find the number of columns/rows
+		int numops = _options.size();
+		int max = (int)java.lang.Math.ceil(java.lang.Math.sqrt(numops));
+		//add the labels to a button group and to the panel
 		ButtonGroup bgroup = new ButtonGroup();
 		_c.insets = new Insets(3,20,20, 3);
 		for (int i=0;i<numOps;i++){
+			int myrow = i;
+			int mycol = 0;
+			while (myrow >=max){
+				myrow = myrow-(max);
+				mycol = mycol+1;
+			}
 			bgroup.add(_options.get(i));
-			_c.gridx=0;
-			_c.gridy=i+2;
+			_c.gridx=mycol;
+			_c.gridy=myrow;
 			_middlepanel.add(_options.get(i),_c);
 		}
 		
@@ -99,12 +115,13 @@ public class QuestionPanel extends ExptPanel {
 		if(_frame.testFinalQuestion(qstindx))
 			next = new JButton("submit and review all selections");
 		else
-			next = new JButton("submit and move to next");
+			next = new JButton("submit and continue");
 		
 		next.addActionListener(new nextQuestionAL());
 		JPanel wrap = new JPanel();
 		_c.gridx=0;
 		_c.gridy=30;
+		_c.gridwidth=5;
 		wrap.add(next);
 		_middlepanel.add(wrap,_c);
 	
@@ -112,45 +129,6 @@ public class QuestionPanel extends ExptPanel {
 	
 	}
 		
-
-//	/* seperate method just to keep code easy to find and manipulate */
-//	private void setStatusQuo() {
-//		switch(_question._sqtype){
-//		case 0:
-//			//do nothing because there is no status quo;
-//			break;
-//		case 1:
-//			//this will just have a suggested option in the top pane
-//			String s1 = _frame.getScribe().getHTMLforLotID(_question._sq);
-//			_northpanel.add(new JLabel("<html>"+s1+"</html>"));
-//			break;
-//		case 2:
-//			//this will pre-select the status quo option
-//			String s2 = _frame.getScribe().getHTMLforLotID(_question._sq);
-//			for (int i=0;i<_options.size();i++)
-//				if (_options.get(i).getText().equals("<html>"+s2+"</html>")){
-//
-//					_options.get(i).setSelected(true);
-//					_question._response = _question._sq;
-//				}
-//			break;
-//		case 3:
-//			//this will both put the status quo above AND select the option
-//			String s3 = _frame.getScribe().getHTMLforLotID(_question._sq);
-//			//softFIX (just take the strings and measure against one another)
-//			for (int i=0;i<_options.size();i++)
-//				if (_options.get(i).getText().equals("<html>"+s3+"</html>")){
-//					if (_options.get(i).getText().equals("lottery "+_question._sq)){
-//
-//					_northpanel.add(new JLabel("<html>"+s3+"</html>"));
-//
-//					_options.get(i).setSelected(true);
-//					_question._response = _question._sq;
-//					}
-//					break;
-//				}
-//		}
-//	}
 	private class lradioAL implements ActionListener{
 		private int id;
 		public lradioAL(int i){
