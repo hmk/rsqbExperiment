@@ -28,15 +28,7 @@ public class QuestionPanel extends ExptPanel {
 
 		//do whatever is necessary to set up a status quo
 		
-//		_c.ipadx = 0;
-//		_c.fill = GridBagConstraints.HORIZONTAL;
-//		JPanel wrap1 = new JPanel();
-//		JLabel qnumlabel = new JLabel();
-//		wrap1.add(qnumlabel);
-//		_c.gridx=0;
-//		_c.gridy=0;
 		
-		_middlepanel.setBorder(new javax.swing.border.TitledBorder("Question "+(_index+1)+" of "+_frame._totalquestions));
 		//get the number of options for question at index
 		int numOps = _question._lotteries.size();
 
@@ -82,8 +74,13 @@ public class QuestionPanel extends ExptPanel {
 
 			tempbutton.addActionListener(new lradioAL(lotteryNumber));
 			_options.add(i,tempbutton);
+			
 		}
 		
+		JPanel optionspanel = new JPanel();
+		optionspanel.setLayout(new GridBagLayout());
+		optionspanel.setBorder(new javax.swing.border.TitledBorder("Question "+(_index+1)+" of "+_frame._totalquestions));
+
 		
 		//find the number of columns/rows
 		int numops = _options.size();
@@ -101,14 +98,14 @@ public class QuestionPanel extends ExptPanel {
 			bgroup.add(_options.get(i));
 			_c.gridx=mycol;
 			_c.gridy=myrow;
-			_middlepanel.add(_options.get(i),_c);
+			optionspanel.add(_options.get(i),_c);
 		}
 		
 		//select if there is an SQ
 		if(selected!=null)
 			selected.setSelected(true);
 		
-		
+		_middlepanel.add(optionspanel);
 		
 		//add the "next" button with the right text
 		JButton next=null;
