@@ -53,7 +53,6 @@ public class RunLotteryPanel extends ExptPanel{
 				s1=s1.replaceAll("\\D", "");
 				s1=("0."+s1);
 				double s1double = Double.parseDouble(s1);
-				winamount = s2;
 				JLabel templabel = new JLabel("If you roll between a "+prev+" and a "+(prev+s1double)+" you will win: "+s2);
 				prev = s1double+prev;
 				v.add(templabel);
@@ -106,7 +105,8 @@ public class RunLotteryPanel extends ExptPanel{
 				if(randdub <=(s1double+currdisplacement)){
 					DecimalFormat df = new DecimalFormat("0.0##");
 					String newDub = df.format(randdub);
-					_winningslabel.setText("<html><center>You rolled a "+newDub+"<br />  Congratulations, you won <br /><h1>"+s2+"</h1></center></html>");
+					winamount =s2;
+					_winningslabel.setText("<html><center>You rolled a "+newDub+"<br />  Congratulations, you won <br /><h1>"+winamount+"</h1></center></html>");
 					foundyet=true;
 				}
 				else

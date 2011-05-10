@@ -12,7 +12,7 @@ import jxl.write.WriteException;
 public class ExptFrame extends JFrame {
 	private int FRAME_HEIGHT=10, FRAME_WIDTH=10;
 	public int _totalquestions,_fromquestion,_toquestion, _roll;
-	private int MIN_USER_ID=1, MAX_USER_ID=50;
+	private int MIN_USER_ID=1, MAX_USER_ID=255;//max excel columns is 255
 	private java.awt.Dimension _dimension;
 	private JPanel _currentPanel;
 	private ExptUser _user;
@@ -34,7 +34,9 @@ public class ExptFrame extends JFrame {
 		_scribe = new ExcelScribe();
 		_fromquestion = _scribe.getFromQuestion();
 		_toquestion = _scribe.getToQuestion();
-	
+		
+		//add the default close operation
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 
@@ -70,7 +72,6 @@ public class ExptFrame extends JFrame {
 		_currentPanel.setVisible(false);
 		_currentPanel = first;
 		this.add(first);
-		
 	}
 	public void switchToNextQuestion(int i) {
 		QuestionPanel nextq = new QuestionPanel(_dimension,this,i);
@@ -78,27 +79,39 @@ public class ExptFrame extends JFrame {
 		_currentPanel = nextq;
 		this.add(nextq);	
 	}
-	
-public void switchToReviewPage() {
+	public void switchToReviewPage() {
 		ReviewPanel rp = new ReviewPanel(_dimension,this);
 		_currentPanel.setVisible(false);
 		_currentPanel = rp;
 		this.add(rp);
 	}
+	public void switchToRunLottery() {
+		RunLotteryPanel rlp = new RunLotteryPanel(_dimension,this);
+		_currentPanel.setVisible(false);
+		_currentPanel=rlp;
+		this.add(rlp);
+	}
+	public void switchToPrepUpload(String winamount) {
+		PrepUploadPanel pup = new PrepUploadPanel(_dimension, this, winamount);
+		_currentPanel.setVisible(false);
+		_currentPanel=pup;
+		this.add(pup);
+	}
+	public void switchToFailurePanel() {
+		FailurePanel fp = new FailurePanel(_dimension, this);
+		_currentPanel.setVisible(false);
+		_currentPanel=fp;
+		this.add(fp);
+	}
+	public void switchToFinalPanel() {
+		FinalPanel finalp = new FinalPanel(_dimension,this);
+		_currentPanel.setVisible(false);
+		_currentPanel=finalp;
+		this.add(finalp);
 
-public void switchToRunLottery() {
-	RunLotteryPanel rlp = new RunLotteryPanel(_dimension,this);
-	_currentPanel.setVisible(false);
-	_currentPanel=rlp;
-	this.add(rlp);
-}
+	}
 
-public void switchToPrepUpload(String winamount) {
-	PrepUploadPanel pup = new PrepUploadPanel(_dimension, this, winamount);
-	_currentPanel.setVisible(false);
-	_currentPanel=pup;
-	this.add(pup);
-}
+
 
 	
 /*
@@ -157,6 +170,10 @@ public void switchToPrepUpload(String winamount) {
 		else
 			return false;
 	}
+
+
+
+
 
 
 

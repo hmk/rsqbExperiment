@@ -62,21 +62,15 @@ public class ExcelScribe {
 	 * @throws IOException
 	 * @throws WriteException
 	 * @throws BiffException 
+	 * @throws InterruptedException 
 	 */
-	public void writeResponses(ExptUser user) throws IOException, WriteException, BiffException{
+	public void writeResponses(ExptUser user) throws IOException, WriteException, BiffException, InterruptedException{
 		//first, we need to download the response file to the local disk
 		FTPHelper ftp = new FTPHelper();
 		File localFile = new File(_responseName+_extension);
-		try {
-			ftp.download(_remoteHostDomain, _remoteHostUsername, _remoteHostPass, 
+		ftp.download(_remoteHostDomain, _remoteHostUsername, _remoteHostPass, 
 					_remotePath+_responseName+_extension, localFile);
-		} catch (MalformedURLException e) {
-			System.out.println("something wrong with the URL!");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("I/O Error!");
-			e.printStackTrace();
-		}
+		
 		//now, lets create a timestamp		
 		WritableWorkbook backup = null;
 		java.util.Date today = new java.util.Date();
@@ -96,20 +90,10 @@ public class ExcelScribe {
 		backup.write();
 		backup.close();
 		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Thread.sleep(3000);
 		//create a copy of this thing
 	    WritableWorkbook copy = Workbook.createWorkbook(new File(_responseName+_extension), Workbook.getWorkbook(localFile));
-	    try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Thread.sleep(3000);
 		
 		//grab the first sheet of our copy
 		WritableSheet s = copy.getSheet(0);
@@ -141,16 +125,13 @@ public class ExcelScribe {
 		this.uploadFile(_responseName+_extension, "experimentAResponses"+".xls");
 	}
 	
-	/** uploads a file to the server */
-	private void uploadFile(String localresponsepath, String filename) {
+	/** uploads a file to the server 
+	 * @throws IOException 
+	 * @throws MalformedURLException */
+	private void uploadFile(String localresponsepath, String filename) throws MalformedURLException, IOException {
 		FTPHelper ftp = new FTPHelper();
-		try {
 			ftp.upload(_remoteHostDomain, _remoteHostUsername, _remoteHostPass, _remotePath+filename, new File(localresponsepath));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		
 	}
 
