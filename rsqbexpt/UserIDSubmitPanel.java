@@ -20,7 +20,7 @@ public class UserIDSubmitPanel extends ExptPanel {
 	private JTextField _idfield;
 	private JLabel _errorlabel;
 	
-	public UserIDSubmitPanel(Dimension d, ExptFrame ef) {
+	public UserIDSubmitPanel(Dimension d, ExptApplet ef) {
 		super(d,ef);
 		
 		//add components

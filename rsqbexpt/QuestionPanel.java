@@ -25,7 +25,7 @@ public class QuestionPanel extends ExptPanel {
 	int _index;
 	private Vector<JRadioButton> _options;
 
-	public QuestionPanel(Dimension d, ExptFrame ef,int qstindx) {
+	public QuestionPanel(Dimension d, ExptApplet ef,int qstindx) {
 		super(d,ef);
 		_question = _frame.getUser().getQuestionAtIndex(qstindx);
 		_index = qstindx;

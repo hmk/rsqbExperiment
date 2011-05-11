@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 
 public class UserIDConfirmPanel extends ExptPanel {
-	public UserIDConfirmPanel(Dimension d, ExptFrame ef) {
+	public UserIDConfirmPanel(Dimension d, ExptApplet ef) {
 		super(d,ef);
 		
 		

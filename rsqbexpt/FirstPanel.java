@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 public class FirstPanel extends ExptPanel {
 
-	public FirstPanel(Dimension d, ExptFrame f){
+	public FirstPanel(Dimension d, ExptApplet f){
 		super(d,f);
 		//store the frame
 		_frame = f;

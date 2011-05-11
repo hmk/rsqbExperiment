@@ -7,9 +7,9 @@ import java.util.Vector;
 public class ExptUser {
 	private Question[] _qarray;
 	private int _userid;
-	private ExptFrame _frame;
+	private ExptApplet _frame;
 
-	public ExptUser(ExptFrame ef, String s){
+	public ExptUser(ExptApplet ef, String s){
 		_frame = ef;
 		int tempUID = 0;
 		try{

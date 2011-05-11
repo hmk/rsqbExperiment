@@ -7,11 +7,11 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
 public abstract class ExptPanel extends JPanel {
-	protected ExptFrame _frame;
+	protected ExptApplet _frame;
 	protected JPanel _middlepanel,_northpanel,_southpanel;
 	protected GridBagConstraints _c;
 	
-	public ExptPanel(Dimension d, ExptFrame ef){
+	public ExptPanel(Dimension d, ExptApplet ef){
 		super();
 		//init visuals
 		this.setSize(d);

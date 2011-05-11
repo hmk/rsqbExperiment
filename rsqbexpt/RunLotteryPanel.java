@@ -18,7 +18,7 @@ public class RunLotteryPanel extends ExptPanel{
 	JButton _playLotButton, _finishButton;
 	String winamount;
 
-	public RunLotteryPanel(Dimension d, ExptFrame ef){
+	public RunLotteryPanel(Dimension d, ExptApplet ef){
 		super(d,ef);
 		String htmlstring = _frame.getScribe().getHTMLforLotID(_frame.getUser().getQuestionAtIndex(_frame._roll)._response);
 		JLabel instructions = new JLabel("<html>"+htmlstring+"</html>");

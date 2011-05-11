@@ -22,7 +22,7 @@ public class PrepUploadPanel extends ExptPanel {
 	private JTextField _textfield;
 	private JLabel _errorlabel;
 
-	public PrepUploadPanel(Dimension d, ExptFrame ef,String winamount){
+	public PrepUploadPanel(Dimension d, ExptApplet ef,String winamount){
 		super(d,ef);
 		
 		//create a label for the winnings

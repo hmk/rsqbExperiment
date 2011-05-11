@@ -18,7 +18,7 @@ public class ReviewPanel extends ExptPanel {
 	private Vector<JLabel> lvect;
 	private int _totalqs, _randdelay;
 	private JButton _rollbutton,_runLottery;
-	public ReviewPanel(Dimension d, ExptFrame ef){
+	public ReviewPanel(Dimension d, ExptApplet ef){
 		super(d,ef);
 
 		//set up the random delay which will later select the lottery
