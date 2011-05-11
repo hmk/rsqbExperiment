@@ -1,13 +1,17 @@
 package rsqbexpt;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.Vector;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
@@ -37,9 +41,14 @@ public class QuestionPanel extends ExptPanel {
 		_options = new Vector<JRadioButton>(); 
 		
 		//set the _c for the SQ
-		_c.gridwidth=1;
-		_c.gridx=0;
-		_c.gridy=3;
+		_c.gridwidth=5;
+		
+		//setup a SQ wrap panel
+		JPanel sqwrap = new JPanel();
+		JPanel subwrap1= new JPanel();
+		JPanel subwrap2 = new JPanel();
+		JPanel subwrap3 = new JPanel();
+		sqwrap.setLayout(new GridLayout(3,0));
 		
 		//create path to one to select so that we can select it after making the buttongroup
 		JRadioButton selected = null;
@@ -54,7 +63,9 @@ public class QuestionPanel extends ExptPanel {
 					break;
 				case 1:
 					//this will just have a suggested option on the top pane
-					_northpanel.add(new JLabel("<html>"+htmlstring+"</html>"),_c);
+					subwrap1.add(new JLabel("The option below was chosen by an expert."));
+					subwrap2.add(new JLabel("You may choose to select this option or select another."));
+					subwrap3.add(new JLabel("<html>"+htmlstring+"</html>"));
 					break;
 				case 2:
 					//this will just pre-select the status quo option
@@ -65,18 +76,26 @@ public class QuestionPanel extends ExptPanel {
 				case 3:
 					//this will put the SQ above AND pre-select
 					selected=tempbutton;
-					_northpanel.add(new JLabel("<html>"+htmlstring+"</html"),_c);
+					subwrap1.add(new JLabel("The option below was chosen by an expert."));
+					subwrap2.add(new JLabel("You may choose to keep this option or change to another."));
+					subwrap3.add(new JLabel("<html>"+htmlstring+"</html>"));
 					_question._response = _question._sq;
 					break;
 					
 				}
 			}
-			
+		
 
 			tempbutton.addActionListener(new lradioAL(lotteryNumber));
 			_options.add(i,tempbutton);
 			
 		}
+		//i hate layouts in swing....
+		sqwrap.add(subwrap1);
+		sqwrap.add(subwrap3);
+		sqwrap.add(subwrap2);
+		_middlepanel.add(sqwrap,_c);
+
 		
 		//shuffle the options
 		Collections.shuffle(_options);
@@ -85,7 +104,6 @@ public class QuestionPanel extends ExptPanel {
 		optionspanel.setLayout(new GridBagLayout());
 		optionspanel.setBorder(new javax.swing.border.TitledBorder("Question "+(_index+1)+" of "+_frame._totalquestions));
 
-		
 		//find the number of columns/rows
 		int numops = _options.size();
 		int max = (int)java.lang.Math.ceil(java.lang.Math.sqrt(numops));
@@ -111,7 +129,10 @@ public class QuestionPanel extends ExptPanel {
 		if(selected!=null)
 			selected.setSelected(true);
 		
-		_middlepanel.add(optionspanel);
+		//add the options panel to the middle panel
+		_c.gridx = 0;
+		_c.gridy=5;
+		_middlepanel.add(optionspanel,_c);
 		
 		//add the "next" button with the right text
 		JButton next=null;
@@ -123,7 +144,7 @@ public class QuestionPanel extends ExptPanel {
 		next.addActionListener(new nextQuestionAL());
 		JPanel wrap = new JPanel();
 		_c.gridx=0;
-		_c.gridy=30;
+		_c.gridy=20;
 		_c.gridwidth=5;
 		wrap.add(next);
 		_middlepanel.add(wrap,_c);

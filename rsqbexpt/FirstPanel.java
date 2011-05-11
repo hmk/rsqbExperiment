@@ -34,7 +34,6 @@ public class FirstPanel extends ExptPanel {
 		_middlepanel.add(instructions,_c);
 		_c.gridy=1;
 		_middlepanel.add(wrappanel,_c);
-		
 	}
 
 	private class bgnActionListener implements ActionListener{

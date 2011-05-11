@@ -10,7 +10,7 @@ import jxl.write.WriteException;
 
 
 public class ExptFrame extends JFrame {
-	private int FRAME_HEIGHT=10, FRAME_WIDTH=10;
+	private int FRAME_HEIGHT=400, FRAME_WIDTH=400;
 	public int _totalquestions,_fromquestion,_toquestion, _roll;
 	private int MIN_USER_ID=1, MAX_USER_ID=255;//max excel columns is 255
 	private java.awt.Dimension _dimension;
@@ -21,6 +21,7 @@ public class ExptFrame extends JFrame {
 	
 	public ExptFrame(){
 		super();
+		
 		this.setUndecorated(true);
 		//set Dimensions
 		_dimension = new java.awt.Dimension(FRAME_HEIGHT,FRAME_WIDTH);
@@ -34,6 +35,7 @@ public class ExptFrame extends JFrame {
 		_scribe = new ExcelScribe();
 		_fromquestion = _scribe.getFromQuestion();
 		_toquestion = _scribe.getToQuestion();
+		
 		
 		//add the default close operation
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
